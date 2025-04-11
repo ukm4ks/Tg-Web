@@ -197,6 +197,24 @@ h1 {
     border: 1px solid rgba(109, 93, 241, 0.1);
 }
 
+/* Стили для временных блоков */
+.time-blocks-container {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.time-block-item {
+    font-size: 0.75rem;
+    color: var(--primary);
+    background: rgba(109, 93, 241, 0.08);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    border: 1px solid rgba(109, 93, 241, 0.1);
+}
+
 .subject-info {
     flex-grow: 1;
 }

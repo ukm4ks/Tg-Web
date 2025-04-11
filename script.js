@@ -60,11 +60,19 @@ const schedule = {
     ],
     "tue": [
         {
-            "start": "8:30",
-            "end": "15:40",
+            "start": "8:00",
+            "end": "13:35",
             "subject": "Виробниче навчання",
-            "teacher": "—",
-            "location": "—"
+            "teacher": "Мацак І. В.",
+            "location": "ел.майс",
+            "timeBlocks": [
+                "8:00 - 8:45",
+                "8:55 - 9:40",
+                "9:50 - 10:35",
+                "11:00 - 11:45",
+                "11:55 - 12:40",
+                "12:50 - 13:35"
+            ]
         }
     ],
     "wed": [
@@ -222,7 +230,6 @@ const schedule = {
     ]
 };
 
-
 // Функции
 function calculateDuration(start, end) {
     const [startH, startM] = start.split(':').map(Number);
@@ -263,10 +270,22 @@ function showDay(dayId) {
             ? 'rgba(92,75,219,0.03)' 
             : 'rgba(255,236,153,0.1)';
 
+        let timeBlocksHTML = '';
+        if (lesson.timeBlocks) {
+            timeBlocksHTML = `
+                <div class="time-blocks-container">
+                    ${lesson.timeBlocks.map(block => `
+                        <div class="time-block-item">${block}</div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
         lessonElement.innerHTML = `
             <div class="time-block">
                 <div class="time-range">${lesson.start} — ${lesson.end}</div>
                 <div class="duration">${duration}</div>
+                ${timeBlocksHTML}
             </div>
             <div class="subject-info">
                 <div class="subject-name">${lesson.subject}</div>
