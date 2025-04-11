@@ -1,4 +1,3 @@
-// Обновлённые данные с началом и концом уроков
 const schedule = {
     "mon": [
         {
@@ -18,44 +17,37 @@ const schedule = {
         {
             "start": "10:25",
             "end": "11:10",
-            "subject": "Історія",
-            "teacher": "Бажан-Пушкіна Ю. П.",
-            "location": "Ауд. 25-2"
+            "subject": "Зарубіжна література",
+            "teacher": "Ковальова Т. М.",
+            "location": "Ауд. 42-2"
         },
         {
             "start": "11:30",
             "end": "12:15",
-            "subject": "Історія",
-            "teacher": "Бажан-Пушкіна Ю. П.",
-            "location": "Ауд. 25-2"
+            "subject": "Зарубіжна література",
+            "teacher": "Ковальова Т. М.",
+            "location": "Ауд. 42-2"
         },
         {
             "start": "12:35",
             "end": "13:20",
-            "subject": "Зарубіжна література",
-            "teacher": "Ковальова Т. М.",
-            "location": "Ауд. 42-2"
+            "subject": "Хімія",
+            "teacher": "Гінтов М. С.",
+            "location": "Ауд. 8-2"
         },
         {
             "start": "13:30",
             "end": "14:15",
-            "subject": "Зарубіжна література",
-            "teacher": "Ковальова Т. М.",
-            "location": "Ауд. 42-2"
+            "subject": "Хімія",
+            "teacher": "Гінтов М. С.",
+            "location": "Ауд. 8-2"
         },
         {
             "start": "14:30",
             "end": "15:15",
-            "subject": "Іноземна мова",
-            "teacher": "Іванченко Л. В. / Іванченко С. С.",
-            "location": "Ауд. 17 / 17-2"
-        },
-        {
-            "start": "15:25",
-            "end": "16:10",
-            "subject": "Іноземна мова",
-            "teacher": "Іванченко Л. В. / Іванченко С. С.",
-            "location": "Ауд. 17 / 17-2"
+            "subject": "Українська література",
+            "teacher": "Прокопенко А. О.",
+            "location": "Ауд. 43-2"
         }
     ],
     "tue": [
@@ -63,8 +55,8 @@ const schedule = {
             "start": "8:00",
             "end": "13:35",
             "subject": "Виробниче навчання",
-            "teacher": "Мацак І. В.",
-            "location": "ел.майс",
+            "teacher": "Ковальчук М. В. | Мацак І. В.",
+            "location": "ел.майс 1   ел.майс 2",
             "timeBlocks": [
                 "8:00 - 8:45",
                 "8:55 - 9:40",
@@ -79,158 +71,164 @@ const schedule = {
         {
             "start": "8:30",
             "end": "9:15",
-            "subject": "Математика",
-            "teacher": "—",
-            "location": "Ауд. 31-2"
+            "subject": "Фізика і астрономія",
+            "teacher": "Журав В. В.",
+            "location": "Ауд. 45-2"
         },
         {
             "start": "9:25",
             "end": "10:10",
-            "subject": "Математика",
-            "teacher": "—",
+            "subject": "Фізика і астрономія",
+            "teacher": "Журав В. В.",
+            "location": "Ауд. 45-2"
+        },
+        {
+            "start": "10:25",
+            "end": "11:10",
+            "subject": "Фізична культура",
+            "teacher": "Смірнов А. А.",
+            "location": "С/М_1"
+        },
+        {
+            "start": "11:30",
+            "end": "12:15",
+            "subject": "Фізична культура",
+            "teacher": "Смірнов А. А.",
+            "location": "С/М_1"
+        },
+        {
+            "start": "12:35",
+            "end": "13:20",
+            "subject": "Географія",
+            "teacher": "Коломієць Л. А.",
             "location": "Ауд. 31-2"
         },
         {
-            "start": "10:20",
-            "end": "11:05",
-            "subject": "Спецтехнологія",
-            "teacher": "—",
-            "location": "Ауд. 23"
+            "start": "13:30",
+            "end": "14:15",
+            "subject": "Математика (cх.)",
+            "teacher": "Чіркова Н. В.",
+            "location": "—"
         },
         {
-            "start": "11:15",
-            "end": "12:00",
-            "subject": "Спецтехнологія",
-            "teacher": "—",
-            "location": "Ауд. 23"
-        },
-        {
-            "start": "12:10",
-            "end": "12:55",
-            "subject": "Фізична культура",
-            "teacher": "—",
-            "location": "С/М_1"
-        },
-        {
-            "start": "13:05",
-            "end": "13:50",
-            "subject": "Фізична культура",
-            "teacher": "—",
-            "location": "С/М_1"
-        },
-        {
-            "start": "14:00",
-            "end": "14:45",
+            "start": "14:30",
+            "end": "15:15",
             "subject": "Електроматеріалознавство",
-            "teacher": "—",
-            "location": "Ауд. 25"
+            "teacher": "Мацак І. В.",
+            "location": "Ауд. 16"
         },
         {
-            "start": "14:55",
-            "end": "15:40",
+            "start": "15:25",
+            "end": "16:10",
             "subject": "Електроматеріалознавство",
-            "teacher": "—",
-            "location": "Ауд. 25"
+            "teacher": "Мацак І. В.",
+            "location": "Ауд. 16"
         }
     ],
     "thu": [
         {
             "start": "8:30",
             "end": "9:15",
-            "subject": "Хімія",
-            "teacher": "—",
-            "location": "Ауд. 8-2"
+            "subject": "Іноземна мова",
+            "teacher": "Іванченко Л. В. / Іванченко С. С.",
+            "location": "Ауд. 17/17-2"
         },
         {
             "start": "9:25",
             "end": "10:10",
+            "subject": "Іноземна мова",
+            "teacher": "Іванченко Л. В. / Іванченко С. С.",
+            "location": "Ауд. 17/17-2"
+        },
+        {
+            "start": "10:25",
+            "end": "11:10",
+            "subject": "Географія",
+            "teacher": "Коломієць Л. А.",
+            "location": "Ауд. 31-2"
+        },
+        {
+            "start": "11:30",
+            "end": "12:15",
+            "subject": "Географія",
+            "teacher": "Коломієць Л. А.",
+            "location": "Ауд. 31-2"
+        },
+        {
+            "start": "12:35",
+            "end": "13:20",
+            "subject": "Математика",
+            "teacher": "Чіркова Н. В.",
+            "location": "Ауд. 32-2"
+        },
+        {
+            "start": "13:30",
+            "end": "14:15",
+            "subject": "Математика",
+            "teacher": "Чіркова Н. В.",
+            "location": "Ауд. 32-2"
+        },
+        {
+            "start": "14:30",
+            "end": "15:15",
             "subject": "Хімія",
-            "teacher": "—",
+            "teacher": "Гінтов М. С.",
             "location": "Ауд. 8-2"
         },
         {
-            "start": "10:20",
-            "end": "11:05",
-            "subject": "Географія",
-            "teacher": "—",
-            "location": "Ауд. 31-2"
-        },
-        {
-            "start": "11:15",
-            "end": "12:00",
-            "subject": "Географія",
-            "teacher": "—",
-            "location": "Ауд. 31-2"
-        },
-        {
-            "start": "12:10",
-            "end": "12:55",
-            "subject": "Фізика і астрономія",
-            "teacher": "—",
-            "location": "Ауд. 45-2"
-        },
-        {
-            "start": "13:05",
-            "end": "13:50",
-            "subject": "Фізика і астрономія",
-            "teacher": "—",
-            "location": "Ауд. 45-2"
+            "start": "15:25",
+            "end": "16:10",
+            "subject": "Хімія",
+            "teacher": "Гінтов М. С.",
+            "location": "Ауд. 8-2"
         }
     ],
     "fri": [
         {
             "start": "8:30",
             "end": "9:15",
-            "subject": "Українська література",
-            "teacher": "—",
-            "location": "Ауд. 43-2"
+            "subject": "Спецтехнологія",
+            "teacher": "Ромашина В. В.",
+            "location": "Ауд. 23"
         },
         {
             "start": "9:25",
             "end": "10:10",
-            "subject": "Українська література",
-            "teacher": "—",
-            "location": "Ауд. 43-2"
+            "subject": "Спецтехнологія",
+            "teacher": "Ромашина В. В.",
+            "location": "Ауд. 23"
         },
         {
-            "start": "10:20",
-            "end": "11:05",
-            "subject": "Історія",
-            "teacher": "—",
-            "location": "Ауд. 25-2"
-        },
-        {
-            "start": "11:15",
-            "end": "12:00",
-            "subject": "Історія",
-            "teacher": "—",
-            "location": "Ауд. 25-2"
-        },
-        {
-            "start": "12:10",
-            "end": "12:55",
-            "subject": "Фізика і астрономія",
-            "teacher": "—",
-            "location": "Ауд. 45-2"
-        },
-        {
-            "start": "13:05",
-            "end": "13:50",
-            "subject": "Математика (?)",
-            "teacher": "—",
-            "location": "Ауд. 31-2"
-        },
-        {
-            "start": "14:00",
-            "end": "14:45",
+            "start": "10:25",
+            "end": "11:10",
             "subject": "Фізична культура",
-            "teacher": "—",
+            "teacher": "Смірнов А. А.",
             "location": "С/М_1"
+        },
+        {
+            "start": "11:30",
+            "end": "12:15",
+            "subject": "Математика",
+            "teacher": "Чіркова Н. В.",
+            "location": "Ауд. 32-2"
+        },
+        {
+            "start": "12:35",
+            "end": "13:20",
+            "subject": "Історія",
+            "teacher": "Бажан-Пушкіна Ю. П.",
+            "location": "Ауд. 25-2"
+        },
+        {
+            "start": "13:30",
+            "end": "14:15",
+            "subject": "Історія",
+            "teacher": "Бажан-Пушкіна Ю. П.",
+            "location": "Ауд. 25-2"
         }
     ]
 };
 
-// Функции
 function calculateDuration(start, end) {
     const [startH, startM] = start.split(':').map(Number);
     const [endH, endM] = end.split(':').map(Number);
@@ -266,9 +264,12 @@ function showDay(dayId) {
         const lessonElement = document.createElement('div');
         lessonElement.className = 'lesson';
         lessonElement.style.animationDelay = `${index * 0.1}s`;
-        lessonElement.style.backgroundColor = index % 2 === 0 
-            ? 'rgba(92,75,219,0.03)' 
-            : 'rgba(255,236,153,0.1)';
+        
+        lessonElement.style.backgroundColor = 'var(--white)';
+
+        if (lesson.isSingle) {
+            lessonElement.classList.add('single-long-lesson');
+        }
 
         let timeBlocksHTML = '';
         if (lesson.timeBlocks) {
@@ -322,7 +323,6 @@ function renderCurrentDate() {
     document.getElementById('update-date').textContent = today.toLocaleDateString();
 }
 
-// Инициализация
 document.addEventListener('DOMContentLoaded', function() {
     renderDaysTabs();
     renderCurrentDate();
