@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Pisun Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @media (prefers-contrast: more) {
+            :root {
+                --text: #000000;
+                --primary: #3a2bb8;
+            }
+            .lesson {
+                border-width: 2px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="far fa-calendar-alt"></i> Расписание</h1>
+            <div class="current-date">Сегодня: <span id="today"></span></div>
+        </header>
+        
+        <div class="tabs" id="days-tabs"></div>
+        
+        <div class="schedule" id="schedule-container"></div>
+        
+        <footer>
+            Обновлено: <span id="update-date"></span>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
