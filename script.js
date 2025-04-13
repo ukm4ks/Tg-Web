@@ -266,12 +266,23 @@ function renderDaysTabs() {
         tab.className = 'tab';
         tab.textContent = dayName;
         tab.dataset.dayId = dayId;
-        tab.onclick = () => showDay(dayId);
+        tab.onclick = () => {
+            tab.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                tab.style.transform = '';
+                showDay(dayId);
+            }, 150);
+        };
         daysContainer.appendChild(tab);
     }
 }
 
 function showDay(dayId) {
+    const activeTab = document.querySelector('.tab.active');
+    if (activeTab && activeTab.dataset.dayId === dayId) {
+        return;
+    }
+
     const container = document.getElementById('schedule-container');
     container.innerHTML = '';
     
@@ -332,11 +343,31 @@ function autoSelectCurrentDay() {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
+    const dayOfWeek = today.getDay();
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+        const container = document.getElementById('schedule-container');
+        container.innerHTML = `
+            <div class="weekend-message">
+                <i class="fas fa-umbrella-beach"></i>
+                <h3>Сегодня выходной!</h3>
+                <p>Можно отдохнуть и набраться сил.</p>
+            </div>
+        `;
+        
+        const friTab = document.querySelector('.tab[data-day-id="fri"]');
+        if (friTab) {
+            friTab.classList.add('active');
+        }
+        return;
+    }
+    
     for (const dayId in schedule) {
         const dayDate = new Date(schedule[dayId].date);
         if (dayDate.getTime() === today.getTime()) {
             const tab = document.querySelector(`.tab[data-day-id="${dayId}"]`);
-            if (tab) tab.click();
+            if (tab) {
+                setTimeout(() => tab.click(), 300);
+            }
             return;
         }
     }
@@ -347,7 +378,9 @@ function autoSelectCurrentDay() {
     
     if (schedule[currentDayId]) {
         const tab = document.querySelector(`.tab[data-day-id="${currentDayId}"]`);
-        if (tab) tab.click();
+        if (tab) {
+            setTimeout(() => tab.click(), 300);
+        }
     }
 }
 
@@ -379,5 +412,4 @@ document.addEventListener('DOMContentLoaded', function() {
     renderDaysTabs();
     renderCurrentDate();
     autoSelectCurrentDay();
-    
 });
