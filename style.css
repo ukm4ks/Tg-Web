@@ -304,8 +304,10 @@ h1 {
     margin-top: 10px;
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
     position: relative;
+    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 .time-block-item {
@@ -320,6 +322,12 @@ h1 {
     transition: all 0.3s ease;
     position: relative;
     z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    min-width: 80px;
+    box-sizing: border-box;
 }
 
 .time-block-item:hover {
@@ -329,13 +337,15 @@ h1 {
 
 .time-block-item.current-time-block {
     background: linear-gradient(135deg, 
-        rgba(155, 89, 182, 0.15) 0%, 
-        rgba(142, 68, 173, 0.15) 100%);
+        rgba(155, 89, 182, 0.2) 0%, 
+        rgba(142, 68, 173, 0.2) 100%);
     border: 2px solid var(--primary);
     box-shadow: 0 4px 12px rgba(155, 89, 182, 0.2);
     color: var(--primary);
     font-weight: 700;
     z-index: 2;
+    padding: 6px 12px;
+    animation: pulse 2s infinite;
 }
 
 .time-block-item.current-time-block::after {
@@ -346,25 +356,11 @@ h1 {
     right: -2px;
     bottom: -2px;
     background: linear-gradient(135deg, 
-        rgba(155, 89, 182, 0.1) 0%, 
-        rgba(142, 68, 173, 0.1) 100%);
+        rgba(155, 89, 182, 0.15) 0%, 
+        rgba(142, 68, 173, 0.15) 100%);
     border-radius: 12px;
     z-index: -1;
-    opacity: 0.5;
-}
-
-.time-block-item.current-time-block .remaining-time {
-    background: linear-gradient(135deg, 
-        rgba(155, 89, 182, 0.1) 0%, 
-        rgba(142, 68, 173, 0.1) 100%);
-    border: 1px solid var(--primary);
-    margin-top: 6px;
-    padding: 4px 10px;
-    border-radius: 10px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    color: var(--primary);
-    display: block;
+    animation: pulse 2s infinite;
 }
 
 .subject-info {
@@ -572,36 +568,56 @@ footer {
 
 .lesson.current {
     background: linear-gradient(135deg, 
-        rgba(155, 89, 182, 0.05) 0%, 
-        rgba(142, 68, 173, 0.05) 100%);
+        rgba(155, 89, 182, 0.08) 0%, 
+        rgba(142, 68, 173, 0.08) 100%);
     border: 2px solid var(--primary);
     transform: scale(1.02);
-    box-shadow: 0 8px 24px rgba(155, 89, 182, 0.1);
+    box-shadow: 0 8px 24px rgba(155, 89, 182, 0.15);
+    position: relative;
+    z-index: 1;
 }
 
 .lesson.next {
     opacity: 0.9;
+    transform: scale(0.98);
 }
 
 .remaining-time {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: var(--primary);
-    background: rgba(155, 89, 182, 0.1);
-    padding: 4px 8px;
-    border-radius: 12px;
-    margin-top: 8px;
-    display: inline-block;
+    background: rgba(155, 89, 182, 0.15);
+    padding: 3px 8px;
+    border-radius: 8px;
     font-weight: 600;
-    animation: pulse 2s infinite;
+    border: 1px solid rgba(155, 89, 182, 0.2);
+    white-space: nowrap;
+    text-align: center;
+    line-height: 1.2;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 @keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
+    0% { 
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(155, 89, 182, 0.2);
+    }
+    50% { 
+        transform: scale(1.02);
+        box-shadow: 0 6px 16px rgba(155, 89, 182, 0.3);
+    }
+    100% { 
+        transform: scale(1);
+        box-shadow: 0 4px 12px rgba(155, 89, 182, 0.2);
+    }
 }
 
-/* Add a subtle glow effect to the current lesson */
+@keyframes glow {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.8; }
+    100% { opacity: 0.5; }
+}
+
 .lesson.current::before {
     content: '';
     position: absolute;
@@ -614,12 +630,6 @@ footer {
         transparent 70%);
     z-index: -1;
     animation: glow 3s infinite;
-}
-
-@keyframes glow {
-    0% { opacity: 0.5; }
-    50% { opacity: 0.8; }
-    100% { opacity: 0.5; }
 }
 
 .lesson.current::after {

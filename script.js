@@ -1,4 +1,4 @@
-const VERSION = '1.5 TG-WEB';
+const VERSION = '1.5.1';
 
 const schedule = {
     "mon": {
@@ -292,17 +292,23 @@ function highlightCurrentLesson(dayId) {
     today.setHours(0, 0, 0, 0);
     dayDate.setHours(0, 0, 0, 0);
     
-    if (dayDate.getTime() !== today.getTime()) {
-        lessons.forEach(lesson => {
-            lesson.classList.remove('current', 'next');
-            const timeBlocks = lesson.querySelectorAll('.time-block-item');
-            timeBlocks.forEach(block => block.classList.remove('current-time-block'));
-        });
-        return;
-    }
-    
+    // Reset all lessons and time blocks
     lessons.forEach(lesson => {
         lesson.classList.remove('current', 'next');
+        const timeBlocks = lesson.querySelectorAll('.time-block-item');
+        timeBlocks.forEach(block => {
+            block.classList.remove('current-time-block');
+            const remainingTime = block.querySelector('.remaining-time');
+            if (remainingTime) remainingTime.remove();
+        });
+    });
+    
+    // If not today, don't highlight anything
+    if (dayDate.getTime() !== today.getTime()) return;
+    
+    let foundCurrentLesson = false;
+    
+    lessons.forEach(lesson => {
         const timeRange = lesson.querySelector('.time-range').textContent;
         const [start, end] = timeRange.split(' — ');
         const [startH, startM] = start.split(':').map(Number);
@@ -310,13 +316,12 @@ function highlightCurrentLesson(dayId) {
         const lessonStart = startH * 60 + startM;
         const lessonEnd = endH * 60 + endM;
         
-        const timeBlocks = lesson.querySelectorAll('.time-block-item');
-        timeBlocks.forEach(block => block.classList.remove('current-time-block'));
-        
+        // Check if lesson has time blocks
         const hasTimeBlocks = lesson.querySelector('.time-blocks-container') !== null;
         
         if (hasTimeBlocks) {
             const timeBlockElements = lesson.querySelectorAll('.time-block-item');
+            let foundCurrentBlock = false;
             
             timeBlockElements.forEach((block, index) => {
                 const blockText = block.textContent.trim();
@@ -327,25 +332,29 @@ function highlightCurrentLesson(dayId) {
                 const blockEndTime = blockEndH * 60 + blockEndM;
                 
                 if (currentTime >= blockStartTime && currentTime <= blockEndTime) {
+                    foundCurrentBlock = true;
                     block.classList.add('current-time-block');
                     
                     const remainingTime = blockEndTime - currentTime;
                     const remainingElement = document.createElement('div');
                     remainingElement.className = 'remaining-time';
                     remainingElement.textContent = `Осталось: ${Math.floor(remainingTime / 60)} ч ${remainingTime % 60} мин`;
-                    
-                    const oldRemaining = lesson.querySelector('.remaining-time');
-                    if (oldRemaining) oldRemaining.remove();
-                    
                     block.appendChild(remainingElement);
                 }
             });
-        }
-        
-        if (currentTime >= lessonStart && currentTime <= lessonEnd) {
-            lesson.classList.add('current');
-        } else if (currentTime < lessonStart) {
-            lesson.classList.add('next');
+            
+            if (foundCurrentBlock) {
+                lesson.classList.add('current');
+                foundCurrentLesson = true;
+            }
+        } else {
+            // For regular lessons without time blocks
+            if (currentTime >= lessonStart && currentTime <= lessonEnd) {
+                lesson.classList.add('current');
+                foundCurrentLesson = true;
+            } else if (currentTime < lessonStart && !foundCurrentLesson) {
+                lesson.classList.add('next');
+            }
         }
     });
 }
