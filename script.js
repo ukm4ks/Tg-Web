@@ -1,3 +1,5 @@
+const VERSION = '1.5 TG-WEB';
+
 const schedule = {
     "mon": {
         "date": "2025-04-14",
@@ -277,6 +279,77 @@ function renderDaysTabs() {
     }
 }
 
+function highlightCurrentLesson(dayId) {
+    const lessons = document.querySelectorAll('.lesson');
+    const now = new Date();
+    const currentTime = now.getHours() * 60 + now.getMinutes();
+    
+    const dayData = schedule[dayId];
+    if (!dayData) return;
+    
+    const dayDate = new Date(dayData.date);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    dayDate.setHours(0, 0, 0, 0);
+    
+    if (dayDate.getTime() !== today.getTime()) {
+        lessons.forEach(lesson => {
+            lesson.classList.remove('current', 'next');
+            const timeBlocks = lesson.querySelectorAll('.time-block-item');
+            timeBlocks.forEach(block => block.classList.remove('current-time-block'));
+        });
+        return;
+    }
+    
+    lessons.forEach(lesson => {
+        lesson.classList.remove('current', 'next');
+        const timeRange = lesson.querySelector('.time-range').textContent;
+        const [start, end] = timeRange.split(' — ');
+        const [startH, startM] = start.split(':').map(Number);
+        const [endH, endM] = end.split(':').map(Number);
+        const lessonStart = startH * 60 + startM;
+        const lessonEnd = endH * 60 + endM;
+        
+        const timeBlocks = lesson.querySelectorAll('.time-block-item');
+        timeBlocks.forEach(block => block.classList.remove('current-time-block'));
+        
+        const hasTimeBlocks = lesson.querySelector('.time-blocks-container') !== null;
+        
+        if (hasTimeBlocks) {
+            const timeBlockElements = lesson.querySelectorAll('.time-block-item');
+            
+            timeBlockElements.forEach((block, index) => {
+                const blockText = block.textContent.trim();
+                const [blockStart, blockEnd] = blockText.split(' - ');
+                const [blockStartH, blockStartM] = blockStart.split(':').map(Number);
+                const [blockEndH, blockEndM] = blockEnd.split(':').map(Number);
+                const blockStartTime = blockStartH * 60 + blockStartM;
+                const blockEndTime = blockEndH * 60 + blockEndM;
+                
+                if (currentTime >= blockStartTime && currentTime <= blockEndTime) {
+                    block.classList.add('current-time-block');
+                    
+                    const remainingTime = blockEndTime - currentTime;
+                    const remainingElement = document.createElement('div');
+                    remainingElement.className = 'remaining-time';
+                    remainingElement.textContent = `Осталось: ${Math.floor(remainingTime / 60)} ч ${remainingTime % 60} мин`;
+                    
+                    const oldRemaining = lesson.querySelector('.remaining-time');
+                    if (oldRemaining) oldRemaining.remove();
+                    
+                    block.appendChild(remainingElement);
+                }
+            });
+        }
+        
+        if (currentTime >= lessonStart && currentTime <= lessonEnd) {
+            lesson.classList.add('current');
+        } else if (currentTime < lessonStart) {
+            lesson.classList.add('next');
+        }
+    });
+}
+
 function showDay(dayId) {
     const activeTab = document.querySelector('.tab.active');
     if (activeTab && activeTab.dataset.dayId === dayId) {
@@ -337,6 +410,8 @@ function showDay(dayId) {
     document.querySelectorAll('.tab').forEach(tab => {
         tab.classList.toggle('active', tab.dataset.dayId === dayId);
     });
+
+    highlightCurrentLesson(dayId);
 }
 
 function autoSelectCurrentDay() {
@@ -354,10 +429,9 @@ function autoSelectCurrentDay() {
             </div>
         `;
         
-        const friTab = document.querySelector('.tab[data-day-id="fri"]');
-        if (friTab) {
-            friTab.classList.add('active');
-        }
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.classList.remove('active');
+        });
         return;
     }
     
@@ -389,6 +463,7 @@ function renderCurrentDate() {
     const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
     document.getElementById('today').textContent = today.toLocaleDateString('ru-RU', options);
     document.getElementById('update-date').textContent = today.toLocaleDateString('ru-RU');
+    document.getElementById('version').textContent = `v${VERSION}`;
 }
 
 function updateWeekDates(startDate) {
@@ -413,3 +488,10 @@ document.addEventListener('DOMContentLoaded', function() {
     renderCurrentDate();
     autoSelectCurrentDay();
 });
+
+setInterval(() => {
+    const activeTab = document.querySelector('.tab.active');
+    if (activeTab) {
+        highlightCurrentLesson(activeTab.dataset.dayId);
+    }
+}, 60000);
