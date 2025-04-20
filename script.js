@@ -1,4 +1,4 @@
-const VERSION = '1.5.3';
+const VERSION = '1.5.4';
 
 
 const themeToggle = document.getElementById('theme-toggle');
@@ -18,28 +18,29 @@ themeToggle.addEventListener('click', (e) => {
     const currentTheme = html.getAttribute('data-theme');
     const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     
-    document.body.classList.add('theme-transition-active', 'theme-transition-lock');
+    document.body.classList.add('theme-transition-active');
     
-    setTimeout(() => {
+    const icon = themeToggle.querySelector('i');
+    icon.style.transform = 'scale(0.8)';
+    
+    requestAnimationFrame(() => {
         html.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
+        
         updateThemeIcon(newTheme);
-    }, 400);
-    
-    setTimeout(() => {
-        document.body.classList.remove('theme-transition-active', 'theme-transition-lock');
-    }, 1000);
+        icon.style.transform = 'scale(1.1)';
+        
+        setTimeout(() => {
+            icon.style.transform = 'scale(1)';
+            document.body.classList.remove('theme-transition-active');
+        }, 400);
+    });
 });
 
 function updateThemeIcon(theme) {
     const icon = themeToggle.querySelector('i');
-    if (theme === 'dark') {
-        icon.classList.remove('fa-moon');
-        icon.classList.add('fa-sun');
-    } else {
-        icon.classList.remove('fa-sun');
-        icon.classList.add('fa-moon');
-    }
+    icon.classList.remove(theme === 'dark' ? 'fa-moon' : 'fa-sun');
+    icon.classList.add(theme === 'dark' ? 'fa-sun' : 'fa-moon');
 }
 
 const schedule = {
