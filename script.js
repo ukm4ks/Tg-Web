@@ -1,4 +1,46 @@
-const VERSION = '1.5.1';
+const VERSION = '1.5.3';
+
+
+const themeToggle = document.getElementById('theme-toggle');
+const html = document.documentElement;
+
+const overlay = document.createElement('div');
+overlay.className = 'theme-transition-overlay';
+document.body.appendChild(overlay);
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) {
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+}
+
+themeToggle.addEventListener('click', (e) => {
+    const currentTheme = html.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    document.body.classList.add('theme-transition-active', 'theme-transition-lock');
+    
+    setTimeout(() => {
+        html.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        updateThemeIcon(newTheme);
+    }, 400);
+    
+    setTimeout(() => {
+        document.body.classList.remove('theme-transition-active', 'theme-transition-lock');
+    }, 1000);
+});
+
+function updateThemeIcon(theme) {
+    const icon = themeToggle.querySelector('i');
+    if (theme === 'dark') {
+        icon.classList.remove('fa-moon');
+        icon.classList.add('fa-sun');
+    } else {
+        icon.classList.remove('fa-sun');
+        icon.classList.add('fa-moon');
+    }
+}
 
 const schedule = {
     "mon": {
