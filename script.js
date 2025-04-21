@@ -1,4 +1,4 @@
-const VERSION = '1.5.4';
+const VERSION = '1.5.5';
 
 
 const themeToggle = document.getElementById('theme-toggle');
@@ -330,6 +330,10 @@ function highlightCurrentLesson(dayId) {
             const remainingTime = block.querySelector('.remaining-time');
             if (remainingTime) remainingTime.remove();
         });
+        // Remove remaining time from regular lessons
+        const timeBlock = lesson.querySelector('.time-block');
+        const existingRemainingTime = timeBlock.querySelector('.remaining-time');
+        if (existingRemainingTime) existingRemainingTime.remove();
     });
     
     // If not today, don't highlight anything
@@ -365,9 +369,15 @@ function highlightCurrentLesson(dayId) {
                     block.classList.add('current-time-block');
                     
                     const remainingTime = blockEndTime - currentTime;
+                    const hours = Math.floor(remainingTime / 60);
+                    const minutes = remainingTime % 60;
+                    
                     const remainingElement = document.createElement('div');
                     remainingElement.className = 'remaining-time';
-                    remainingElement.textContent = `Осталось: ${Math.floor(remainingTime / 60)} ч ${remainingTime % 60} мин`;
+                    remainingElement.innerHTML = `
+                        <div class="remaining-time-label">До конца:</div>
+                        <div class="remaining-time-value">${hours > 0 ? `${hours} ч ` : ''}${minutes} мин</div>
+                    `;
                     block.appendChild(remainingElement);
                 }
             });
@@ -381,6 +391,19 @@ function highlightCurrentLesson(dayId) {
             if (currentTime >= lessonStart && currentTime <= lessonEnd) {
                 lesson.classList.add('current');
                 foundCurrentLesson = true;
+                
+                const remainingTime = lessonEnd - currentTime;
+                const hours = Math.floor(remainingTime / 60);
+                const minutes = remainingTime % 60;
+                
+                const timeBlock = lesson.querySelector('.time-block');
+                const remainingElement = document.createElement('div');
+                remainingElement.className = 'remaining-time';
+                remainingElement.innerHTML = `
+                    <div class="remaining-time-label">До конца урока:</div>
+                    <div class="remaining-time-value">${hours > 0 ? `${hours} ч ` : ''}${minutes} мин</div>
+                `;
+                timeBlock.appendChild(remainingElement);
             } else if (currentTime < lessonStart && !foundCurrentLesson) {
                 lesson.classList.add('next');
             }
