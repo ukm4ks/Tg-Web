@@ -45,7 +45,7 @@ function updateThemeIcon(theme) {
 
 const schedule = {
     "mon": {
-        "date": "2025-04-21",
+        "date": "2025-04-28",
         "lessons": [
             {
                 "start": "8:30",
@@ -106,7 +106,7 @@ const schedule = {
         ]
     },
     "tue": {
-        "date": "2025-04-22",
+        "date": "2025-04-29",
         "lessons": [
             {
                 "start": "8:00",
@@ -126,7 +126,7 @@ const schedule = {
         ]
     },
     "wed": {
-        "date": "2025-04-23",
+        "date": "2025-04-30",
         "lessons": [
             {
                 "start": "8:30",
@@ -187,7 +187,7 @@ const schedule = {
         ]
     },
     "thu": {
-        "date": "2025-04-24",
+        "date": "2025-05-01",
         "lessons": [
             {
                 "start": "8:30",
@@ -241,7 +241,7 @@ const schedule = {
         ]
     },
     "fri": {
-        "date": "2025-04-25",
+        "date": "2025-05-02",
         "lessons": [
             {
                 "start": "8:30",
