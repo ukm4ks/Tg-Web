@@ -1,0 +1,253 @@
+/* Enhanced styles for maintenance message */
+.weekend-message {
+    text-align: center;
+    padding: 60px 30px;
+    margin: 40px 20px;
+    background: linear-gradient(165deg, 
+        rgba(255, 255, 255, 0.08) 0%, 
+        rgba(255, 255, 255, 0.02) 100%
+    );
+    border-radius: 30px;
+    box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+        inset 0 0 40px rgba(255, 255, 255, 0.05);
+    animation: fadeInUp 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transform: translateZ(0);
+    transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.weekend-message::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at var(--x, 50%) var(--y, 50%), 
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 60%);
+    opacity: 0;
+    transition: opacity 0.6s;
+    pointer-events: none;
+}
+
+.weekend-message:hover::after {
+    opacity: 1;
+}
+
+.weekend-message:hover {
+    transform: translateY(-4px) translateZ(0);
+    box-shadow: 
+        0 25px 50px rgba(0, 0, 0, 0.15),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.15),
+        inset 0 0 50px rgba(255, 255, 255, 0.08);
+}
+
+.weekend-message::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(var(--primary), 0.8) 50%,
+        transparent 100%
+    );
+    animation: glow 3s linear infinite;
+}
+
+.weekend-message i {
+    font-size: 4rem;
+    margin: 0 0 25px 0;
+    display: inline-block;
+    animation: floatingIcon 6s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(135deg, 
+        var(--primary) 0%,
+        var(--secondary) 50%,
+        var(--primary) 100%
+    );
+    background-size: 200% 200%;
+    animation: 
+        floatingIcon 6s ease-in-out infinite,
+        gradientMove 8s linear infinite;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 8px 12px rgba(var(--shadow), 0.3));
+}
+
+.weekend-message h3 {
+    color: var(--text);
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.3s backwards;
+    padding: 0 10px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: inline-block;
+}
+
+.weekend-message h3::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    width: 40%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--primary),
+        transparent
+    );
+    transform: translateX(-50%);
+    animation: glowLine 3s ease-in-out infinite;
+}
+
+.weekend-message p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 12px;
+    animation: fadeInUp 1s cubic-bezier(0.22, 1, 0.36, 1) 0.4s backwards;
+    padding: 0 20px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.weekend-message:hover p {
+    opacity: 1;
+}
+
+/* Enhanced animations */
+@keyframes floatingIcon {
+    0% { 
+        transform: translateY(0) scale(1) rotate(0deg);
+        filter: drop-shadow(0 8px 12px rgba(var(--shadow), 0.3));
+    }
+    25% {
+        transform: translateY(-8px) scale(1.05) rotate(-3deg);
+        filter: drop-shadow(0 15px 15px rgba(var(--shadow), 0.2));
+    }
+    75% {
+        transform: translateY(-6px) scale(1.03) rotate(3deg);
+        filter: drop-shadow(0 12px 14px rgba(var(--shadow), 0.25));
+    }
+    100% { 
+        transform: translateY(0) scale(1) rotate(0deg);
+        filter: drop-shadow(0 8px 12px rgba(var(--shadow), 0.3));
+    }
+}
+
+@keyframes gradientMove {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes glow {
+    0% {
+        opacity: 0.5;
+        transform: scaleX(0.8);
+    }
+    50% {
+        opacity: 1;
+        transform: scaleX(1.2);
+    }
+    100% {
+        opacity: 0.5;
+        transform: scaleX(0.8);
+    }
+}
+
+@keyframes glowLine {
+    0% {
+        opacity: 0.3;
+        width: 30%;
+    }
+    50% {
+        opacity: 1;
+        width: 60%;
+    }
+    100% {
+        opacity: 0.3;
+        width: 30%;
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+        filter: blur(5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+    }
+}
+
+@keyframes scaleXIn {
+    from { 
+        transform: scaleX(0);
+        opacity: 0;
+    }
+    to { 
+        transform: scaleX(1);
+        opacity: 1;
+    }
+}
+
+/* Dark theme enhancements */
+[data-theme="dark"] .weekend-message {
+    background: linear-gradient(165deg, 
+        rgba(40, 40, 50, 0.95) 0%,
+        rgba(25, 25, 35, 0.98) 100%
+    );
+    box-shadow: 
+        0 10px 30px rgba(0, 0, 0, 0.4),
+        inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 480px) {
+    .weekend-message {
+        margin: 15px;
+        padding: 40px 20px;
+    }
+    
+    .weekend-message i {
+        font-size: 3rem;
+        margin-bottom: 15px;
+    }
+    
+    .weekend-message h3 {
+        font-size: 1.4rem;
+        margin-bottom: 12px;
+    }
+    
+    .weekend-message p {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
+}
