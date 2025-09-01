@@ -6,36 +6,26 @@
     <title>✨ Pisun Bot</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="enhanced-style.css">
-    <style>
-        @media (prefers-contrast: more) {
-            :root {
-                --text: #000000;
-                --primary: #3a2bb8;
-            }
-            .lesson {
-                border-width: 2px;
-            }
-        }
-    </style>
+        <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="far fa-calendar-alt"></i> Расписание</h1>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Переключить тему">
-                <i class="fas fa-moon"></i>
-            </button>
+            <h1>Schedule | Lumia Dev.</h1>
+            <div class="current-date">Сегодня: <span id="today"></span></div>
         </header>
         
-        <div class="weekend-message">
-            <i class="fas fa-tools"></i>
-            <h3>Веб-приложение временно недоступно</h3>
-            <p>В данный момент ведутся технические работы.<br>Пожалуйста, попробуйте зайти позже.</p>
-        </div>
+        <div class="tabs" id="days-tabs"></div>
+        
+        <div class="schedule" id="schedule-container"></div>
+        
+        <footer>
+            <span class="update-info">Обновлено: <span id="update-date"></span></span>
+            <span class="version">Версия: <span id="version"></span></span>
+        </footer>
     </div>
 
+    <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

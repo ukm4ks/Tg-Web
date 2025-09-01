@@ -1,270 +1,16 @@
-const VERSION = '1.5.5';
+const VERSION = 'v2.0.0';
+const LAST_UPDATE = '2025-09-01';
 
-
-const themeToggle = document.getElementById('theme-toggle');
-const html = document.documentElement;
-
-const overlay = document.createElement('div');
-overlay.className = 'theme-transition-overlay';
-document.body.appendChild(overlay);
-
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme) {
-    html.setAttribute('data-theme', savedTheme);
-    updateThemeIcon(savedTheme);
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    return date.toLocaleDateString('ru-RU', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+    }).replace(/\./g, '.');
 }
 
-themeToggle.addEventListener('click', (e) => {
-    const currentTheme = html.getAttribute('data-theme');
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-    
-    document.body.classList.add('theme-transition-active');
-    
-    const icon = themeToggle.querySelector('i');
-    icon.style.transform = 'scale(0.8)';
-    
-    requestAnimationFrame(() => {
-        html.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        
-        updateThemeIcon(newTheme);
-        icon.style.transform = 'scale(1.1)';
-        
-        setTimeout(() => {
-            icon.style.transform = 'scale(1)';
-            document.body.classList.remove('theme-transition-active');
-        }, 400);
-    });
-});
-
-function updateThemeIcon(theme) {
-    const icon = themeToggle.querySelector('i');
-    icon.classList.remove(theme === 'dark' ? 'fa-moon' : 'fa-sun');
-    icon.classList.add(theme === 'dark' ? 'fa-sun' : 'fa-moon');
-}
-
-const schedule = {
-    "mon": {
-        "date": "2025-06-23",
-        "lessons": [
-            {
-                "start": "8:30",
-                "end": "9:15",
-                "subject": "Українська література",
-                "teacher": "Прокопенко А. О.",
-                "location": "Ауд 6-2"
-            },
-            {
-                "start": "9:25",
-                "end": "10:10",
-                "subject": "Українська література",
-                "teacher": "Прокопенко А. О.",
-                "location": "Ауд 6-2"
-            },
-            {
-                "start": "10:25",
-                "end": "11:10",
-                "subject": "Хімія",
-                "teacher": "Гінтов М. С.",
-                "location": "Ауд 8-2"
-            },
-            {
-                "start": "11:30",
-                "end": "12:15",
-                "subject": "Захист України",
-                "teacher": "Іжевський І. А.",
-                "location": "Ауд 24-2"
-            },
-            {
-                "start": "12:35",
-                "end": "13:20",
-                "subject": "Фізика і астрономія",
-                "teacher": "Журав В. В.",
-                "location": "Ауд 45-2"
-            },
-            {
-                "start": "13:30",
-                "end": "14:15",
-                "subject": "Фізика і астрономія",
-                "teacher": "Журав В. В.",
-                "location": "Ауд 45-2"
-            },
-            {
-                "start": "14:30",
-                "end": "15:15",
-                "subject": "Фізична культура",
-                "teacher": "Смірнов А. А.",
-                "location": "С/М_1"
-            },
-            {
-                "start": "15:25",
-                "end": "16:10",
-                "subject": "Фізична культура",
-                "teacher": "Смірнов А. А.",
-                "location": "С/М_1"
-            }
-        ]
-    },
-    "tue": {
-        "date": "2025-06-24",
-        "lessons": [
-            {
-                "start": "8:30",
-                "end": "9:15",
-                "subject": "Фізична культура",
-                "teacher": "Смірнов А. А.",
-                "location": "С/М_1"
-            },
-            {
-                "start": "9:25",
-                "end": "10:10",
-                "subject": "Математика",
-                "teacher": "Чіркова Н. В.",
-                "location": "Ауд (не вказано)"
-            },
-            {
-                "start": "10:25",
-                "end": "11:10",
-                "subject": "Українська література",
-                "teacher": "Прокопенко А. О.",
-                "location": "Ауд 6-2"
-            },
-            {
-                "start": "11:30",
-                "end": "12:15",
-                "subject": "Українська література",
-                "teacher": "Прокопенко А. О.",
-                "location": "Ауд 6-2"
-            },
-            {
-                "start": "12:35",
-                "end": "13:20",
-                "subject": "Зарубіжна література",
-                "teacher": "Ковальова Т. М.",
-                "location": "Ауд 42-2"
-            },
-            {
-                "start": "13:30",
-                "end": "14:15",
-                "subject": "Зарубіжна література",
-                "teacher": "Ковальова Т. М.",
-                "location": "Ауд 42-2"
-            },
-            {
-                "start": "14:30",
-                "end": "15:15",
-                "subject": "Фізика і астрономія",
-                "teacher": "Журав В. В.",
-                "location": "Ауд 45-2"
-            },
-            {
-                "start": "15:25",
-                "end": "16:10",
-                "subject": "Фізика і астрономія",
-                "teacher": "Журав В. В.",
-                "location": "Ауд 45-2"
-            }
-        ]
-    },
-    "wed": {
-        "date": "2025-06-25",
-        "lessons": [
-            {
-                "start": "8:00",
-                "end": "13:35",
-                "subject": "Виробниче навчання",
-                "teacher": "Ковальчук М. В. / Мацак І. В.",
-                "location": "ел.майс 1 / ел.майс 2",
-                "timeBlocks": [
-                    "8:00 - 8:45",
-                    "8:55 - 9:40",
-                    "9:50 - 10:35",
-                    "11:00 - 11:45",
-                    "11:55 - 12:40",
-                    "12:50 - 13:35"
-                ]
-            }
-        ]
-    },
-    "thu": {
-        "date": "2025-06-26",
-        "lessons": [
-            {
-                "start": "8:00",
-                "end": "13:35",
-                "subject": "Виробниче навчання",
-                "teacher": "Ковальчук М. В. / Мацак І. В.",
-                "location": "ел.майс 1 / ел.майс 2",
-                "timeBlocks": [
-                    "8:00 - 8:45",
-                    "8:55 - 9:40",
-                    "9:50 - 10:35",
-                    "11:00 - 11:45",
-                    "11:55 - 12:40",
-                    "12:50 - 13:35"
-                ]
-            }
-        ]
-    },
-    "fri": {
-        "date": "2025-06-27",
-        "lessons": [
-            {
-                "start": "8:30",
-                "end": "9:15",
-                "subject": "Математика",
-                "teacher": "Чіркова Н. В.",
-                "location": "Ауд (не вказано)"
-            },
-            {
-                "start": "9:25",
-                "end": "10:10",
-                "subject": "Географія",
-                "teacher": "Коломієць Л. А.",
-                "location": "Ауд 31-2"
-            },
-            {
-                "start": "10:25",
-                "end": "11:10",
-                "subject": "Осн. Енергоефективності",
-                "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
-            },
-            {
-                "start": "11:30",
-                "end": "12:15",
-                "subject": "Осн. Енергоефективності",
-                "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
-            },
-            {
-                "start": "12:35",
-                "end": "13:20",
-                "subject": "Спецтехнологія",
-                "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
-            },
-            {
-                "start": "13:30",
-                "end": "14:15",
-                "subject": "Спецтехнологія",
-                "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
-            },
-            {
-                "start": "14:30",
-                "end": "15:15",
-                "subject": "Спецтехнологія",
-                "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
-            }
-        ]
-    }
-};
-
-
-
-
+document.documentElement.setAttribute('data-theme', 'dark');
 
 function calculateDuration(start, end) {
     const [startH, startM] = start.split(':').map(Number);
@@ -514,8 +260,6 @@ function renderCurrentDate() {
     const today = new Date();
     const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
     document.getElementById('today').textContent = today.toLocaleDateString('ru-RU', options);
-    document.getElementById('update-date').textContent = today.toLocaleDateString('ru-RU');
-    document.getElementById('version').textContent = `v${VERSION}`;
 }
 
 function updateWeekDates(startDate) {
@@ -538,6 +282,8 @@ function updateWeekDates(startDate) {
 document.addEventListener('DOMContentLoaded', function() {
     renderDaysTabs();
     renderCurrentDate();
+    document.getElementById('version').textContent = VERSION;
+    document.getElementById('update-date').textContent = formatDate(LAST_UPDATE);
     autoSelectCurrentDay();
 });
 
