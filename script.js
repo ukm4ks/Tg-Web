@@ -1,4 +1,4 @@
-const VERSION = 'v2.0.0';
+const VERSION = 'v2.1.0';
 const LAST_UPDATE = '2025-09-01';
 
 function formatDate(dateStr) {
@@ -58,7 +58,6 @@ function highlightCurrentLesson(dayId) {
     today.setHours(0, 0, 0, 0);
     dayDate.setHours(0, 0, 0, 0);
     
-    // Reset all lessons and time blocks
     lessons.forEach(lesson => {
         lesson.classList.remove('current', 'next');
         const timeBlocks = lesson.querySelectorAll('.time-block-item');
@@ -67,13 +66,11 @@ function highlightCurrentLesson(dayId) {
             const remainingTime = block.querySelector('.remaining-time');
             if (remainingTime) remainingTime.remove();
         });
-        // Remove remaining time from regular lessons
         const timeBlock = lesson.querySelector('.time-block');
         const existingRemainingTime = timeBlock.querySelector('.remaining-time');
         if (existingRemainingTime) existingRemainingTime.remove();
     });
     
-    // If not today, don't highlight anything
     if (dayDate.getTime() !== today.getTime()) return;
     
     let foundCurrentLesson = false;
@@ -86,7 +83,6 @@ function highlightCurrentLesson(dayId) {
         const lessonStart = startH * 60 + startM;
         const lessonEnd = endH * 60 + endM;
         
-        // Check if lesson has time blocks
         const hasTimeBlocks = lesson.querySelector('.time-blocks-container') !== null;
         
         if (hasTimeBlocks) {
@@ -124,7 +120,6 @@ function highlightCurrentLesson(dayId) {
                 foundCurrentLesson = true;
             }
         } else {
-            // For regular lessons without time blocks
             if (currentTime >= lessonStart && currentTime <= lessonEnd) {
                 lesson.classList.add('current');
                 foundCurrentLesson = true;
@@ -166,130 +161,161 @@ function showDay(dayId) {
     const options = { weekday: 'long', day: 'numeric', month: 'long' };
     dayHeader.textContent = date.toLocaleDateString('ru-RU', options);
     container.appendChild(dayHeader);
-
-    dayData.lessons.forEach((lesson, index) => {
-        const duration = calculateDuration(lesson.start, lesson.end);
-        const lessonElement = document.createElement('div');
-        lessonElement.className = 'lesson';
-        lessonElement.style.animationDelay = `${index * 0.1}s`;
-        
-        if (lesson.timeBlocks && lesson.timeBlocks.length > 3) {
-            lessonElement.classList.add('single-long-lesson');
-        }
-
-        let timeBlocksHTML = '';
-        if (lesson.timeBlocks) {
-            timeBlocksHTML = `
-                <div class="time-blocks-container">
-                    ${lesson.timeBlocks.map(block => `
-                        <div class="time-block-item">${block}</div>
-                    `).join('')}
-                </div>
-            `;
-        }
-
-        lessonElement.innerHTML = `
-            <div class="time-block">
-                <div class="time-range">${lesson.start} — ${lesson.end}</div>
-                <div class="duration">${duration}</div>
-                ${timeBlocksHTML}
-            </div>
-            <div class="subject-info">
-                <div class="subject-name">${lesson.subject}</div>
-                <div class="subject-meta">
-                    <span><i class="fas fa-user"></i> ${lesson.teacher}</span>
-                    <span><i class="fas fa-map-marker-alt"></i> ${lesson.location}</span>
-                </div>
-            </div>
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const dayDate = new Date(dayData.date);
+    dayDate.setHours(0, 0, 0, 0);
+    
+    if (dayDate.getTime() === today.getTime()) {
+        dayHeader.innerHTML += ' <span style="color: var(--text-primary);">(Сегодня)</span>';
+    }
+    
+    if (dayData.lessons && dayData.lessons.length > 0) {
+        dayData.lessons.forEach((lesson, index) => {
+            const lessonElement = document.createElement('div');
+            lessonElement.className = 'lesson';
+            lessonElement.style.setProperty('--animation-order', index);
+            
+            const timeBlock = document.createElement('div');
+            timeBlock.className = 'time-block';
+            
+            const timeRange = document.createElement('div');
+            timeRange.className = 'time-range';
+            timeRange.textContent = `${lesson.start} — ${lesson.end}`;
+            
+            const duration = document.createElement('div');
+            duration.className = 'duration';
+            duration.textContent = calculateDuration(lesson.start, lesson.end);
+            
+            timeBlock.appendChild(timeRange);
+            timeBlock.appendChild(duration);
+            
+            const subjectInfo = document.createElement('div');
+            subjectInfo.className = 'subject-info';
+            
+            const subjectName = document.createElement('div');
+            subjectName.className = 'subject-name';
+            subjectName.textContent = lesson.subject;
+            
+            const subjectMeta = document.createElement('div');
+            subjectMeta.className = 'subject-meta';
+            
+            if (lesson.teacher) {
+                const teacherSpan = document.createElement('span');
+                teacherSpan.innerHTML = `<i class="fas fa-user"></i>${lesson.teacher}`;
+                subjectMeta.appendChild(teacherSpan);
+            }
+            
+            if (lesson.location) {
+                const locationSpan = document.createElement('span');
+                locationSpan.innerHTML = `<i class="fas fa-map-marker-alt"></i>${lesson.location}`;
+                subjectMeta.appendChild(locationSpan);
+            }
+            
+            if (lesson.type) {
+                const typeSpan = document.createElement('span');
+                typeSpan.innerHTML = `<i class="fas fa-tag"></i>${lesson.type}`;
+                subjectMeta.appendChild(typeSpan);
+            }
+            
+            subjectInfo.appendChild(subjectName);
+            subjectInfo.appendChild(subjectMeta);
+            
+            lessonElement.appendChild(timeBlock);
+            lessonElement.appendChild(subjectInfo);
+            
+            if (lesson.time_blocks && lesson.time_blocks.length > 0) {
+                const timeBlocksContainer = document.createElement('div');
+                timeBlocksContainer.className = 'time-blocks-container';
+                
+                lesson.time_blocks.forEach((block, blockIndex) => {
+                    const timeBlockItem = document.createElement('div');
+                    timeBlockItem.className = 'time-block-item';
+                    timeBlockItem.textContent = `${block.start} - ${block.end}`;
+                    timeBlocksContainer.appendChild(timeBlockItem);
+                });
+                
+                subjectInfo.appendChild(timeBlocksContainer);
+            }
+            
+            container.appendChild(lessonElement);
+        });
+    } else {
+        const noLessons = document.createElement('div');
+        noLessons.className = 'weekend-message';
+        noLessons.innerHTML = `
+            <i class="fas fa-calendar-check"></i>
+            <h3>Выходной день</h3>
+            <p>Сегодня нет занятий по расписанию</p>
         `;
-        container.appendChild(lessonElement);
-    });
-
+        container.appendChild(noLessons);
+    }
+    
     document.querySelectorAll('.tab').forEach(tab => {
-        tab.classList.toggle('active', tab.dataset.dayId === dayId);
+        tab.classList.remove('active');
+        if (tab.dataset.dayId === dayId) {
+            tab.classList.add('active');
+        }
     });
-
+    
     highlightCurrentLesson(dayId);
 }
 
-function autoSelectCurrentDay() {
+function updateCurrentDate() {
     const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    
-    const dayOfWeek = today.getDay();
-    if (dayOfWeek === 0 || dayOfWeek === 6) {
-        const container = document.getElementById('schedule-container');
-        container.innerHTML = `
-            <div class="weekend-message">
-                <i class="fas fa-umbrella-beach"></i>
-                <h3>Сегодня выходной!</h3>
-                <p>Можно отдохнуть и набраться сил.</p>
-            </div>
-        `;
-        
-        document.querySelectorAll('.tab').forEach(tab => {
-            tab.classList.remove('active');
-        });
-        return;
-    }
-    
-    for (const dayId in schedule) {
-        const dayDate = new Date(schedule[dayId].date);
-        if (dayDate.getTime() === today.getTime()) {
-            const tab = document.querySelector(`.tab[data-day-id="${dayId}"]`);
-            if (tab) {
-                setTimeout(() => tab.click(), 300);
-            }
-            return;
-        }
-    }
-    
-    const days = ['sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat'];
-    const todayDay = today.getDay();
-    const currentDayId = days[todayDay];
-    
-    if (schedule[currentDayId]) {
-        const tab = document.querySelector(`.tab[data-day-id="${currentDayId}"]`);
-        if (tab) {
-            setTimeout(() => tab.click(), 300);
-        }
-    }
+    const options = { 
+        weekday: 'long', 
+        day: 'numeric', 
+        month: 'long',
+        year: 'numeric'
+    };
+    const dateStr = today.toLocaleDateString('ru-RU', options);
+    document.getElementById('today').textContent = dateStr;
 }
 
-function renderCurrentDate() {
-    const today = new Date();
-    const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
-    document.getElementById('today').textContent = today.toLocaleDateString('ru-RU', options);
-}
-
-function updateWeekDates(startDate) {
-    const date = new Date(startDate);
-    const days = ['mon', 'tue', 'wed', 'thu', 'fri'];
+function initializeMenu() {
+    const menuToggle = document.getElementById('menuToggle');
+    const menuDropdown = document.getElementById('menuDropdown');
     
-    days.forEach(day => {
-        if (schedule[day]) {
-            schedule[day].date = date.toISOString().split('T')[0];
-            date.setDate(date.getDate() + 1);
+    menuToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        menuDropdown.classList.toggle('show');
+        menuToggle.classList.toggle('active');
+    });
+    
+    document.addEventListener('click', function(e) {
+        if (!menuDropdown.contains(e.target) && e.target !== menuToggle) {
+            menuDropdown.classList.remove('show');
+            menuToggle.classList.remove('active');
         }
     });
-
-    const activeTab = document.querySelector('.tab.active');
-    if (activeTab) {
-        showDay(activeTab.dataset.dayId);
-    }
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    renderDaysTabs();
-    renderCurrentDate();
-    document.getElementById('version').textContent = VERSION;
-    document.getElementById('update-date').textContent = formatDate(LAST_UPDATE);
-    autoSelectCurrentDay();
-});
+function getCurrentDayId() {
+    const today = new Date();
+    const dayOfWeek = today.getDay();
+    const dayMap = {1: 'mon', 2: 'tue', 3: 'wed', 4: 'thu', 5: 'fri'};
+    return dayMap[dayOfWeek] || 'mon';
+}
 
-setInterval(() => {
-    const activeTab = document.querySelector('.tab.active');
-    if (activeTab) {
-        highlightCurrentLesson(activeTab.dataset.dayId);
-    }
-}, 60000);
+function initialize() {
+    updateCurrentDate();
+    renderDaysTabs();
+    initializeMenu();
+    
+    document.getElementById('update-date').textContent = formatDate(LAST_UPDATE);
+    document.getElementById('version').textContent = VERSION;
+    
+    const currentDayId = getCurrentDayId();
+    showDay(currentDayId);
+    
+    setInterval(() => {
+        const activeTab = document.querySelector('.tab.active');
+        if (activeTab) {
+            highlightCurrentLesson(activeTab.dataset.dayId);
+        }
+    }, 60000);
+}
+
+document.addEventListener('DOMContentLoaded', initialize);

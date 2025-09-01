@@ -7,42 +7,48 @@ const schedule = {
                 "end": "9:15",
                 "subject": "Фізика і астрономія",
                 "teacher": "Журав В. В.",
-                "location": "Ауд 45-2"
+                "location": "Ауд 45-2",
+                "type": "Лекция"
             },
             {
                 "start": "9:25",
                 "end": "10:10",
                 "subject": "Фізика і астрономія",
                 "teacher": "Журав В. В.",
-                "location": "Ауд 45-2"
+                "location": "Ауд 45-2",
+                "type": "Лекция"
             },
             {
                 "start": "10:20",
                 "end": "11:05",
                 "subject": "Математика",
                 "teacher": "Чіркова Н. В.",
-                "location": "Ауд 32-2"
+                "location": "Ауд 32-2",
+                "type": "Лекция"
             },
             {
                 "start": "11:25",
                 "end": "12:10",
                 "subject": "Математика",
                 "teacher": "Чіркова Н. В.",
-                "location": "Ауд 32-2"
+                "location": "Ауд 32-2",
+                "type": "Лекция"
             },
             {
                 "start": "12:40",
                 "end": "13:25",
                 "subject": "Інформатика",
                 "teacher": "Новікова Т. М.",
-                "location": "Ауд 41"
+                "location": "Ауд 41",
+                "type": "Лекция"
             },
             {
                 "start": "13:35",
                 "end": "14:20",
                 "subject": "Інформатика",
                 "teacher": "Новікова Т. М.",
-                "location": "Ауд 41"
+                "location": "Ауд 41", 
+                "type": "Лекция"
             }
         ]
     },
@@ -54,56 +60,64 @@ const schedule = {
                 "end": "9:15",
                 "subject": "Математика",
                 "teacher": "Чіркова Н. В.",
-                "location": "Ауд 32-2"
+                "location": "Ауд 32-2", 
+                "type": "Лекция"
             },
             {
                 "start": "9:25",
                 "end": "10:10",
                 "subject": "Математика",
                 "teacher": "Чіркова Н. В.",
-                "location": "Ауд 32-2"
+                "location": "Ауд 32-2", 
+                "type": "Лекция"
             },
             {
                 "start": "10:20",
                 "end": "11:05",
                 "subject": "Історія",
                 "teacher": "Бажан-Пушкіна Ю. П.",
-                "location": "Ауд 25-2"
+                "location": "Ауд 25-2", 
+                "type": "Лекция"
             },
             {
                 "start": "11:25",
                 "end": "12:10",
                 "subject": "Історія",
                 "teacher": "Бажан-Пушкіна Ю. П.",
-                "location": "Ауд 25-2"
+                "location": "Ауд 25-2", 
+                "type": "Лекция"
             },
             {
                 "start": "12:40",
                 "end": "13:25",
                 "subject": "Географія",
                 "teacher": "Ступка М. І.",
-                "location": "Ауд 3-2"
+                "location": "Ауд 3-2", 
+                "type": "Лекция"
             },
             {
                 "start": "13:35",
                 "end": "14:20",
                 "subject": "Географія",
                 "teacher": "Ступка М. І.",
-                "location": "Ауд 3-2"
+                "location": "Ауд 3-2", 
+                "type": "Лекция"
             },
             {
                 "start": "14:30",
                 "end": "15:15",
                 "subject": "Спецтехнологія",
                 "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
+                "location": "Ауд 23", 
+                "type": "Лекция"
             },
             {
                 "start": "15:25",
                 "end": "16:10",
                 "subject": "Спецтехнологія",
                 "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
+                "location": "Ауд 23", 
+                "type": "Лекция"
             }
         ]
     },
@@ -115,56 +129,64 @@ const schedule = {
                 "end": "9:15",
                 "subject": "Українська мова",
                 "teacher": "Прокопенко А. О.",
-                "location": "Ауд 43-2"
+                "location": "Ауд 43-2", 
+                "type": "Лекция"
             },
             {
                 "start": "9:25",
                 "end": "10:10",
                 "subject": "Українська мова",
                 "teacher": "Прокопенко А. О.",
-                "location": "Ауд 43-2"
+                "location": "Ауд 43-2", 
+                "type": "Лекция"
             },
             {
                 "start": "10:20",
                 "end": "11:05",
                 "subject": "Фізична культура",
                 "teacher": "Смірнов А. А.",
-                "location": "С/М_1"
+                "location": "С/М_1", 
+                "type": "Лекция"
             },
             {
                 "start": "11:25",
                 "end": "12:10",
                 "subject": "Фізична культура",
                 "teacher": "Смірнов А. А.",
-                "location": "С/М_1"
+                "location": "С/М_1", 
+                "type": "Лекция"
             },
             {
                 "start": "12:40",
                 "end": "13:25",
                 "subject": "Біологія і екологія",
                 "teacher": "Гінтовт М. С.",
-                "location": "Ауд 8-2"
+                "location": "Ауд 8-2", 
+                "type": "Лекция"
             },
             {
                 "start": "13:35",
                 "end": "14:20",
                 "subject": "Біологія і екологія",
                 "teacher": "Гінтовт М. С.",
-                "location": "Ауд 8-2"
+                "location": "Ауд 8-2", 
+                "type": "Лекция"
             },
             {
                 "start": "14:30",
                 "end": "15:15",
                 "subject": "Фізика і астрономія",
                 "teacher": "Журав В. В.",
-                "location": "Ауд 45-2"
+                "location": "Ауд 45-2", 
+                "type": "Лекция"
             },
             {
                 "start": "15:25",
                 "end": "16:10",
                 "subject": "Історія",
                 "teacher": "Бажан-Пушкіна Ю. П.",
-                "location": "Ауд 25-2"
+                "location": "Ауд 25-2", 
+                "type": "Лекция"
             }
         ]
     },
@@ -176,56 +198,64 @@ const schedule = {
                 "end": "9:15",
                 "subject": "Спецтехнологія",
                 "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
+                "location": "Ауд 23", 
+                "type": "Лекция"
             },
             {
                 "start": "9:25",
                 "end": "10:10",
                 "subject": "Спецтехнологія",
                 "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
+                "location": "Ауд 23", 
+                "type": "Лекция"
             },
             {
                 "start": "10:20",
                 "end": "11:05",
                 "subject": "Фізична культура",
                 "teacher": "Смірнов А. А.",
-                "location": "С/М_1"
+                "location": "С/М_1", 
+                "type": "Лекция"
             },
             {
                 "start": "11:25",
                 "end": "12:10",
                 "subject": "Фізична культура",
                 "teacher": "Смірнов А. А.",
-                "location": "С/М_1"
+                "location": "С/М_1", 
+                "type": "Лекция"
             },
             {
                 "start": "12:40",
                 "end": "13:25",
                 "subject": "Географія",
                 "teacher": "Ступка М. І.",
-                "location": "Ауд 3-2"
+                "location": "Ауд 3-2", 
+                "type": "Лекция"
             },
             {
                 "start": "13:35",
                 "end": "14:20",
                 "subject": "Географія",
                 "teacher": "Ступка М. І.",
-                "location": "Ауд 3-2"
+                "location": "Ауд 3-2", 
+                "type": "Лекция"
             },
             {
                 "start": "14:30",
                 "end": "15:15",
                 "subject": "Біологія і екологія",
                 "teacher": "Гінтовт М. С.",
-                "location": "Ауд 8-2"
+                "location": "Ауд 8-2", 
+                "type": "Лекция"
             },
             {
                 "start": "15:25",
                 "end": "16:10",
                 "subject": "Біологія і екологія",
                 "teacher": "Гінтовт М. С.",
-                "location": "Ауд 8-2"
+                "location": "Ауд 8-2", 
+                "type": "Лекция"
             }
         ]
     },
@@ -237,42 +267,48 @@ const schedule = {
                 "end": "9:15",
                 "subject": "Українська мова",
                 "teacher": "Прокопенко А. О.",
-                "location": "Ауд 43-2"
+                "location": "Ауд 43-2", 
+                "type": "Лекция"
             },
             {
                 "start": "9:25",
                 "end": "10:10",
                 "subject": "Українська мова",
                 "teacher": "Прокопенко А. О.",
-                "location": "Ауд 43-2"
+                "location": "Ауд 43-2", 
+                "type": "Лекция"
             },
             {
                 "start": "10:20",
                 "end": "11:05",
                 "subject": "Біологія і екологія",
                 "teacher": "Гінтовт М. С.",
-                "location": "Ауд 8-2"
+                "location": "Ауд 8-2", 
+                "type": "Лекция"
             },
             {
                 "start": "11:25",
                 "end": "12:10",
                 "subject": "Біологія і екологія",
                 "teacher": "Гінтовт М. С.",
-                "location": "Ауд 8-2"
+                "location": "Ауд 8-2", 
+                "type": "Лекция"
             },
             {
                 "start": "12:40",
                 "end": "13:25",
                 "subject": "Спецтехнологія",
                 "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
+                "location": "Ауд 23", 
+                "type": "Лекция"
             },
             {
                 "start": "13:35",
                 "end": "14:20",
                 "subject": "Спецтехнологія",
                 "teacher": "Ромашина В. В.",
-                "location": "Ауд 23"
+                "location": "Ауд 23", 
+                "type": "Лекция"
             }
         ]
     }
