@@ -1,6 +1,6 @@
 const schedule = {
     "mon": {
-        "date": "2025-09-01",
+        "date": "2025-09-08",
         "lessons": [
             {
                 "start": "8:30",
@@ -69,7 +69,7 @@ const schedule = {
         ]
     },
     "tue": {
-        "date": "2025-09-02",
+        "date": "2025-09-09",
         "lessons": [
             {
                 "start": "8:30",
@@ -138,7 +138,7 @@ const schedule = {
         ]
     },
     "wed": {
-        "date": "2025-09-03",
+        "date": "2025-09-10",
         "lessons": [
             {
                 "start": "8:30",
@@ -191,7 +191,7 @@ const schedule = {
         ]
     },
     "thu": {
-        "date": "2025-09-04",
+        "date": "2025-09-11",
         "lessons": [
             {
                 "start": "8:30",
@@ -260,7 +260,7 @@ const schedule = {
         ]
     },
     "fri": {
-        "date": "2025-09-05",
+        "date": "2025-09-12",
         "lessons": [
             {
                 "start": "8:30",
@@ -313,3 +313,4 @@ const schedule = {
         ]
     }
 };
+
