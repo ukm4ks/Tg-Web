@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>✨ Pisun Bot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <button class="menu-toggle" id="menuToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1>Schedule | Lumia Dev.</h1>
+                <div class="menu-dropdown" id="menuDropdown">
+                    <div class="theme-option active">
+                        <i class="fas fa-moon"></i>
+                        Dark Theme
+                    </div>
+                </div>
+            </div>
+            <div class="current-date">Сегодня: <span id="today"></span></div>
+        </header>
+        
+        <div class="schedule" id="schedule-container">
+            <div class="maintenance-message">
+                <div class="maintenance-icon-wrapper">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h3>Бот на обновлении</h3>
+                <p>Мы работаем над улучшениями. Пожалуйста, попробуйте позже.</p>
+                <div class="maintenance-status">
+                    <span class="status-dot"></span>
+                    <span>Обновление в процессе...</span>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <span class="update-info">Обновлено: <span id="update-date"></span></span>
+            <span class="version">Версия: <span id="version"></span></span>
+        </footer>
+    </div>
+
+    <script>
+    const VERSION = 'v2.1.0';
+    const LAST_UPDATE = '2025-09-01';
+
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('ru-RU', {
+            day: '2-digit',
+            month: '2-digit',
+            year: 'numeric'
+        }).replace(/\./g, '.');
+    }
+
+    document.documentElement.setAttribute('data-theme', 'dark');
+
+    function updateCurrentDate() {
+        const today = new Date();
+        const options = { 
+            weekday: 'long', 
+            day: 'numeric', 
+            month: 'long',
+            year: 'numeric'
+        };
+        const dateStr = today.toLocaleDateString('ru-RU', options);
+        document.getElementById('today').textContent = dateStr;
+    }
+
+    function initializeMenu() {
+        const menuToggle = document.getElementById('menuToggle');
+        const menuDropdown = document.getElementById('menuDropdown');
+        
+        menuToggle.addEventListener('click', function(e) {
+            e.stopPropagation();
+            menuDropdown.classList.toggle('show');
+            menuToggle.classList.toggle('active');
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (!menuDropdown.contains(e.target) && e.target !== menuToggle) {
+                menuDropdown.classList.remove('show');
+                menuToggle.classList.remove('active');
+            }
+        });
+    }
+
+    function initialize() {
+        updateCurrentDate();
+        initializeMenu();
+        
+        document.getElementById('update-date').textContent = formatDate(LAST_UPDATE);
+        document.getElementById('version').textContent = VERSION;
+    }
+
+    document.addEventListener('DOMContentLoaded', initialize);
+    </script>
+</body>
+</html>

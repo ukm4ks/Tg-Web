@@ -1082,3 +1082,360 @@ footer {
         padding: 4px 8px;
     }
 }
+
+.maintenance-message {
+    margin: 20px;
+    padding: 50px 30px;
+    text-align: center;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.03) 50%,
+        rgba(255, 255, 255, 0.06) 100%
+    );
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 32px var(--shadow),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    animation: fadeIn 0.6s ease-out, softFloat 4s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.maintenance-message::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.03),
+        transparent
+    );
+    animation: shimmerOptimized 4s ease-in-out infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.maintenance-message > * {
+    position: relative;
+    z-index: 1;
+}
+
+.maintenance-icon-wrapper {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.15) 0%,
+        rgba(255, 255, 255, 0.05) 100%
+    );
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--border);
+    box-shadow: 0 8px 20px var(--shadow),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    animation: iconPulseOptimized 2.5s ease-in-out infinite, scaleYIn 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: transform;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+}
+
+.maintenance-icon-wrapper i {
+    font-size: 2.5rem;
+    color: var(--text-primary);
+    animation: shimmerIconOptimized 2.5s ease-in-out infinite;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+@keyframes shimmerIconOptimized {
+    0%, 100% {
+        opacity: 0.8;
+        transform: scale(1) translateZ(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.08) translateZ(0);
+    }
+}
+
+.maintenance-message h3 {
+    font-size: 1.8rem;
+    margin-bottom: 16px;
+    color: var(--text-primary);
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    animation: fadeInUp 0.7s ease-out 0.1s both;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+.maintenance-message p {
+    font-size: 1.05rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    animation: fadeInUp 0.7s ease-out 0.2s both;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+.maintenance-progress {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border);
+    animation: fadeInUp 0.7s ease-out 0.3s both;
+    position: relative;
+}
+
+.progress-bar {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.3),
+        rgba(255, 255, 255, 0.7),
+        rgba(255, 255, 255, 0.3)
+    );
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(255, 255, 255, 0.25);
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: width;
+    transform: translateZ(0);
+    position: relative;
+}
+
+.progress-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.2),
+        transparent
+    );
+    border-radius: 12px;
+    animation: progressGlow 2s ease-in-out infinite;
+    transform: translateZ(0);
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.15),
+        transparent
+    );
+    border-radius: 12px;
+    animation: progressFlux 3s ease-in-out infinite;
+    transform: translateZ(0);
+}
+
+@keyframes progressGlow {
+    0%, 100% {
+        opacity: 0.3;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+    }
+    50% {
+        opacity: 1;
+        box-shadow: 0 0 16px rgba(255, 255, 255, 0.35);
+    }
+}
+
+@keyframes progressFlux {
+    0%, 100% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+@keyframes progressShine {
+    0% {
+        left: -100%;
+    }
+    50% {
+        left: 100%;
+    }
+    100% {
+        left: 100%;
+    }
+}
+
+@keyframes progressStripes {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 20px 0;
+    }
+}
+
+.progress-percent {
+    position: absolute;
+    top: -22px;
+    right: 0;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    animation: fadeInUp 0.7s ease-out 0.3s both;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.progress-message {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-top: 16px;
+    font-weight: 600;
+    min-height: 20px;
+    animation: fadeInUp 0.7s ease-out 0.4s both;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: color;
+}
+
+.progress-message.success {
+    color: rgba(100, 255, 150, 0.9);
+    text-shadow: 0 0 10px rgba(100, 255, 150, 0.4);
+    animation: messageSuccess 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progress-message.error {
+    color: rgba(255, 100, 100, 0.9);
+    text-shadow: 0 0 10px rgba(255, 100, 100, 0.4);
+    animation: messageError 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes messageSuccess {
+    0% {
+        transform: scale(0.95);
+        opacity: 0.8;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes messageError {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px);
+    }
+    75% {
+        transform: translateX(5px);
+    }
+}
+
+.maintenance-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    animation: fadeInUp 0.7s ease-out 0.4s both;
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+.status-dot {
+    width: 12px;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    animation: pulseOptimized 2s ease-in-out infinite;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    will-change: transform, opacity;
+    transform: translateZ(0);
+}
+
+@keyframes shimmerOptimized {
+    0% {
+        opacity: 0.3;
+        transform: translateX(-100%) translateZ(0);
+    }
+    50% {
+        opacity: 0.6;
+    }
+    100% {
+        opacity: 0.3;
+        transform: translateX(100%) translateZ(0);
+    }
+}
+
+@keyframes pulseOptimized {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(1) translateZ(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.3) translateZ(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(20px) translateZ(0);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) translateZ(0);
+    }
+}
+
+@keyframes softFloat {
+    0%, 100% {
+        transform: translateY(0) translateZ(0);
+    }
+    50% {
+        transform: translateY(-4px) translateZ(0);
+    }
+}
+
+@keyframes iconPulseOptimized {
+    0%, 100% {
+        opacity: 0.8;
+        transform: scale(1) translateZ(0);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05) translateZ(0);
+    }
+}
