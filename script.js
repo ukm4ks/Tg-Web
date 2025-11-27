@@ -1,5 +1,5 @@
-const VERSION = 'v2.1.0';
-const LAST_UPDATE = '2025-09-01';
+const VERSION = 'Soon...';
+const LAST_UPDATE = 'Updating...';
 
 function formatDate(dateStr) {
     const date = new Date(dateStr);
@@ -317,5 +317,6 @@ function initialize() {
         }
     }, 60000);
 }
+
 
 document.addEventListener('DOMContentLoaded', initialize);
